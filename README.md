@@ -28,7 +28,9 @@ A full-stack ride-sharing application built with React, Node.js, Express, and Mo
 
 ## Technology Stack
 
-### Backend
+### Backend Options
+
+#### Option 1: Node.js/Express (Primary)
 - **Runtime**: Node.js
 - **Framework**: Express.js
 - **Database**: MongoDB with Mongoose
@@ -36,6 +38,14 @@ A full-stack ride-sharing application built with React, Node.js, Express, and Mo
 - **Real-time**: Socket.io
 - **Security**: Helmet, CORS, Rate Limiting
 - **Validation**: Express Validator
+
+#### Option 2: Python/FastAPI (Alternative - Stronger Backend)
+- **Runtime**: Python 3.9+
+- **Framework**: FastAPI
+- **Database**: MongoDB with Motor (async)
+- **Authentication**: JWT with python-jose
+- **Validation**: Pydantic
+- **Features**: Auto-generated OpenAPI docs, Type hints, Async/await
 
 ### Frontend
 - **Framework**: React 18
@@ -61,9 +71,19 @@ A full-stack ride-sharing application built with React, Node.js, Express, and Mo
    cd uber-clone
    ```
 
-2. **Install dependencies**
+2. **Complete setup (installs dependencies and seeds demo data)**
    ```bash
+   npm run setup
+   ```
+
+   **OR do it step by step:**
+
+   ```bash
+   # Install dependencies
    npm run install-all
+   
+   # Seed demo data
+   npm run seed
    ```
 
 3. **Environment Setup**
@@ -73,7 +93,7 @@ A full-stack ride-sharing application built with React, Node.js, Express, and Mo
    NODE_ENV=development
    PORT=5000
    MONGODB_URI=mongodb://localhost:27017/uber_clone
-   JWT_SECRET=your_super_secret_jwt_key_here
+   JWT_SECRET=your_super_secret_jwt_key_here_change_in_production
    JWT_EXPIRE=30d
    
    # Optional: Configure these for full functionality
@@ -92,9 +112,14 @@ A full-stack ride-sharing application built with React, Node.js, Express, and Mo
    
    # Or if using MongoDB service
    sudo systemctl start mongod
+   
+   # Or using Docker
+   docker run -d -p 27017:27017 --name mongodb mongo:latest
    ```
 
 5. **Run the application**
+
+   **Node.js Backend (Default):**
    ```bash
    # Start both frontend and backend concurrently
    npm run dev
@@ -104,6 +129,20 @@ A full-stack ride-sharing application built with React, Node.js, Express, and Mo
    npm run client  # Frontend on http://localhost:3000
    ```
 
+   **Python FastAPI Backend (Alternative):**
+   ```bash
+   # Install Python dependencies
+   cd backend-python
+   pip install -r requirements.txt
+   
+   # Start FastAPI server
+   uvicorn main:app --reload --port 8000
+   
+   # In another terminal, start React frontend
+   cd frontend
+   npm start  # Frontend on http://localhost:3000
+   ```
+
 ## Demo Accounts
 
 Once the application is running, you can use these demo accounts:
@@ -111,6 +150,8 @@ Once the application is running, you can use these demo accounts:
 - **User**: `user@demo.com` / `password`
 - **Driver**: `driver@demo.com` / `password`
 - **Admin**: `admin@demo.com` / `password`
+
+**Note**: Run `npm run seed` to populate the database with demo data.
 
 ## API Endpoints
 
